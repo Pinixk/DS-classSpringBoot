@@ -79,7 +79,7 @@ public class MemoRepositoryTests {
     result.get().forEach(t -> System.out.println(t));
   }
 
-  @Test // Query문
+  @Test // Query문 정렬
   public void testQueryMethods() {
     List<Memo> list = repository.findByMnoBetweenOrderByMnoDesc(70L, 80L);
     for (Memo memo : list) {
@@ -87,7 +87,7 @@ public class MemoRepositoryTests {
     }
   }
 
-  @Test // Query문
+  @Test // Query문 페이징
   public void testQueryMethodWithPageable() {
     Pageable pageable = PageRequest.of(0, 10, Sort.by("mno").descending());
     Page<Memo> result = repository.findByMnoBetween(10L, 50L, pageable);
@@ -96,12 +96,12 @@ public class MemoRepositoryTests {
 
   @Commit
   @Transactional
-  @Test
+  @Test // Query문 삭제
   public void testDeleteQueryMethods() {
     repository.deleteMemoByMnoLessThan(20L);
   }
 
-  @Test
+  @Test // Query @ 정렬
   public void testQuery() {
     List<Memo> list = repository.getListDesc();
     for (var m : list) {
