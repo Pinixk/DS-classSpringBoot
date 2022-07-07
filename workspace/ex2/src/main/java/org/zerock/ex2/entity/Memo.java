@@ -1,5 +1,8 @@
 package org.zerock.ex2.entity;
 
-public class Memo {
+import javax.persistence.Entity;
 
+@Entity
+public class Memo {
+  private Long mno;
 }
