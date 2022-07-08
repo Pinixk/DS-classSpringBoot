@@ -9,13 +9,17 @@ import org.springframework.data.jpa.repository.Query;
 import org.zerock.ex2.entity.Memo;
 
 public interface MemoRepository extends JpaRepository<Memo, Long> {
-  // List<Memo> findByMnoBtween(Long form, Long to);
+
+  // Query Method
   List<Memo> findByMnoBetweenOrderByMnoDesc(Long from, Long to);
 
   Page<Memo> findByMnoBetween(Long from, Long to, Pageable pageable);
+  // paging처리 할 때 단일 일 때는 <> 지정 가능
+  // 복수일 경우 ObjectArray로 
 
   void deleteMemoByMnoLessThan(Long mno);
 
+  // Query annotation
   @Query("select m from Memo m order by m.mno desc")
   List<Memo> getListDesc();
 
