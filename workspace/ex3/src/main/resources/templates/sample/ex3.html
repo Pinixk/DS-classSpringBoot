@@ -8,13 +8,15 @@
   </head>
   <body>
     <h1>Hello ex3</h1>
-
     <h2 th:text="${result}"></h2>
     <h2 th:text="${dto}"></h2>
 
     <script th:inline="javascript">
-      var msg = /* [[${result}]]; */ 'result';
-      var dto = /* [[${dto}]]; */ 'dto';
+      /*[+ 
+        var msg2 = [[${result}]] 
+      +]*/
+      var msg = /* [[${result}]]; */ "";
+      var dto = /* [[${dto}]]; */ "dto";
       console.log(msg);
       console.log(JSON.stringify(dto));
     </script>

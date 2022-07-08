@@ -28,7 +28,7 @@ public class SampleController {
     model.addAttribute("title", "Hello ex1");
   }
 
-  @GetMapping({"/ex2","/exLink"})
+  @GetMapping({ "/ex2", "/exLink" })
   public void ex2(Model model) { // view의 내용을 보내주기 위함
     log.info("ex2/.................");
     model.addAttribute("title", "Hello ex2");
@@ -71,6 +71,11 @@ public class SampleController {
   @GetMapping("/ex3")
   public void ex3() {
     log.info("ex3...........");
+  }
+
+  @GetMapping("exLayout1")
+  public void exLayout1() {
+    log.info("exLayout1.........................");
   }
 
 }
