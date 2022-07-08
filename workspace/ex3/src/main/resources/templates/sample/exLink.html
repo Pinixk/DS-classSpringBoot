@@ -12,8 +12,10 @@
   <body>
     <h1 th:text="${title}"></h1>
     <ul>
-      <th:block th:each="dto,state:${list}">  <!-- 복수 반복문-->
-      <li th:class="${dto.sno%5==0}?'target'" th:text="${dto}"></li>
+      <th:block th:each="dto,state:${list}">
+      <li th:class="${dto.sno%5==0}?'target'">
+        <a th:href="@{/sample/exView(sno=${dto.sno})}">[[${dto}]]</a>
+      </li>
       </th:block>
     </ul>
   </body>

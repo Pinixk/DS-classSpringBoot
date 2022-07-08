@@ -6,15 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <style>
-    .target {background-color: red;}
-  </style>
   <body>
-    <h1 th:text="${title}"></h1>
-    <ul>
-      <th:block th:each="dto,state:${list}">  <!-- 복수 반복문-->
-      <li th:class="${dto.sno%5==0}?'target'" th:text="${dto}"></li>
-      </th:block>
-    </ul>
+    <h1>Hello ex3</h1>
+
+    <h2 th:text="${result}"></h2>
+    <h2 th:text="${dto}"></h2>
+
+    <script th:inline="javascript">
+      var msg = [[${result}]];
+      var dto = [[${dto}]];
+      console.log(msg);
+      console.log(JSON.stringify(dto));
+    </script>
   </body>
 </html>
