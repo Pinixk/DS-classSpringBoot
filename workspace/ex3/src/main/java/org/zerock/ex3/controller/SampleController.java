@@ -52,4 +52,5 @@ public class SampleController {
     model.addAttribute("list", list);
     // return "/sample/ex1"; // 경로 표시
   }
+
 }

@@ -1,12 +1,25 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <h1 th:text="${list}"></h1>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .target {background-color: red;}
+  </style>
+  <body>
+    <h1 th:text="${title}"></h1>
+    <ul>
+      <li th:each="dto,state : ${list}" style="list-style: none">
+        [[${state.index+1}]]
+        [[${dto}]] 
+         <span th:if="${dto.sno%5==0}" th:text="${'-------'+dto.sno}"> </span>
+        <span th:unless="${dto.sno%5==0}" th:text="${dto.first}"> </span>
+      </li>
+      <br><br><br>
+      <li th:each="dto,state : ${list}" th:class="${dto.sno%5==0}?'target'" th:text="${dto}"> </li>
+    </ul>
+  </body>
 </html>
