@@ -8,10 +8,13 @@
   </head>
   <body>
     <h1>Fragment Test</h1>
+    <div style="border:1px solid skyblue">
+      <th:block th:replace="~{/fragments/fragment2}"></th:block>
+    </div>
 
     <h1>Layout 1 - 1</h1>
     <div th:replace="~{/fragments/fragment1 :: part1}"></div>
-    <!-- 상대 경로 -->
+    <!-- server relative 경로 -->
 
     <h1>Layout 1 - 2</h1>
     <div th:insert="~{/fragments/fragment1 :: part2}"></div>
