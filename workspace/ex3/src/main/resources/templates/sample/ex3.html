@@ -13,8 +13,8 @@
     <h2 th:text="${dto}"></h2>
 
     <script th:inline="javascript">
-      var msg = [[${result}]];
-      var dto = [[${dto}]];
+      var msg = /* [[${result}]]; */ 'result';
+      var dto = /* [[${dto}]]; */ 'dto';
       console.log(msg);
       console.log(JSON.stringify(dto));
     </script>
