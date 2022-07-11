@@ -58,8 +58,30 @@ public class GuestbookRepositoryTests {
     QGuestbook qGuestbook = QGuestbook.guestbook;   // 1, Q 도메인을 가져옴
     String keyword = "1";
     BooleanBuilder builder = new BooleanBuilder();  // 2, 질의를 위한 객체
+
     BooleanExpression expression = qGuestbook.title.contains(keyword);  // 3, 질의 식을 구현
+
     builder.and(expression);  // 4, 객체가 and로 질의 식을 실행
+
+    Page<Guestbook> result = repository.findAll(builder, pageable);
+    result.stream().forEach(gb -> {System.out.println(gb);});
+  }
+
+  @Test
+  public void testQuery2(){
+    Pageable pageable = PageRequest.of(0,10,Sort.by("gno").descending());
+
+    // 동적인 query를 위해(subquery, join 등)
+    QGuestbook qGuestbook = QGuestbook.guestbook;   // 1, Q 도메인을 가져옴
+    String keyword = "1";
+    BooleanBuilder builder = new BooleanBuilder();  // 2, 질의를 위한 객체
+
+    BooleanExpression exTitle = qGuestbook.title.contains(keyword);  // 3, 질의 식을 구현
+    BooleanExpression exContent = qGuestbook.content.contains(keyword);  
+    BooleanExpression exAll = exTitle.or(exContent);  
+
+    builder.and(exAll);  // 4, 객체가 and로 질의 식을 실행
+    builder.and(qGuestbook.gno.gt(0L));
 
     Page<Guestbook> result = repository.findAll(builder, pageable);
     result.stream().forEach(gb -> {System.out.println(gb);});
