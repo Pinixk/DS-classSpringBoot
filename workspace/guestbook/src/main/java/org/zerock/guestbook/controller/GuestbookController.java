@@ -10,9 +10,9 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("guestbook")
 @Log4j2
 public class GuestbookController {
-  @GetMapping({"/","/list"})
-  public String list(){
-    log.info("list...........");
+  @GetMapping({ "/", "/list" })
+  public String list() {
+    log.info("list.................");
     return "/guestbook/list";
   }
 }
