@@ -18,6 +18,6 @@ public class GuestbookServiceTests {
                         .writer("user0")
                         .build();
 
-    System.out.println(service.register(dto));
+    System.out.println("gno:::"+service.register(dto));
   }
 }

@@ -10,6 +10,7 @@ public interface GuestbookService {
     Guestbook entity = Guestbook.builder()
                         .gno(dto.getGno())
                         .title(dto.getTitle())
+                        .content(dto.getContent())
                         .writer(dto.getWriter())
                         .build();
 
