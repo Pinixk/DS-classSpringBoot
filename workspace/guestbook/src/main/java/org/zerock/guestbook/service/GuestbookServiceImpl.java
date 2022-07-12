@@ -30,6 +30,7 @@ public class GuestbookServiceImpl implements GuestbookService {
     log.info("register dto : " + dto);
     Guestbook entity = dtoToEntity(dto);
     gbRepositoty.save(entity);
+    log.info(entity.getGno());
     return entity.getGno();
   }
 
