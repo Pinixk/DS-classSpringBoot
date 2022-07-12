@@ -21,7 +21,8 @@ import lombok.extern.log4j.Log4j2;
 public class GuestbookServiceImpl implements GuestbookService {
 
   private final GuestbookRepository gbRepositoty;
-  // 프록시 객체이면서 순환참조를 함
+  // 프록시 객체이기 때문에 nullpoint
+  // 때문에 값을 받기 위해 순환참조를 함
   // final 필수
 
   @Override
@@ -36,12 +37,14 @@ public class GuestbookServiceImpl implements GuestbookService {
   public PageResultDTO<GuestbookDTO, Guestbook> getList(PageRequestDTO requestDTO) {
     Pageable pageable = requestDTO.getPageable(Sort.by("gno").descending());
     Page<Guestbook> result = gbRepositoty.findAll(pageable);
+
     Function<Guestbook, GuestbookDTO> fn = new Function<Guestbook,GuestbookDTO>() {
       @Override
       public GuestbookDTO apply(Guestbook entity) {
         return entityToDto(entity);
       }
     };
+    
     return new PageResultDTO<>(result, fn);
   }
 }

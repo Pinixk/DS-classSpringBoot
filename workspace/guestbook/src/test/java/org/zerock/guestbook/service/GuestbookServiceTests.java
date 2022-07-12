@@ -16,25 +16,33 @@ public class GuestbookServiceTests {
   @Test
   void testRegister() {
     GuestbookDTO dto = GuestbookDTO.builder()
-                        .title("Sample Title...")
-                        .content("Sample Content...")
-                        .writer("user0")
-                        .build();
+        .title("Sample Title...")
+        .content("Sample Content...")
+        .writer("user0")
+        .build();
 
-    System.out.println("gno:::"+service.register(dto));
+    System.out.println("gno:::" + service.register(dto));
   }
 
   @Test
-  public void testList(){
+  public void testList() {
     PageRequestDTO requestDto = PageRequestDTO.builder()
-                          .page(1)
-                          .size(10)
-                          .build();
-
+        .page(1)
+        .size(10)
+        .build();
     PageResultDTO<GuestbookDTO, Guestbook> resultDTO = service.getList(requestDto);
+
+    System.out.println("prev: " + resultDTO.isPrev());
+    System.out.println("next: " + resultDTO.isNext());
+    System.out.println("Total: " + resultDTO.getTotalPage());
+    System.out.println("----------------------------------");
 
     for (GuestbookDTO dto : resultDTO.getDtoList()) {
       System.out.println(dto);
     }
+
+    System.out.println("----------------------------------");
+
+    resultDTO.getPageList().forEach(i -> System.out.println(i + "  "));
   }
 }
