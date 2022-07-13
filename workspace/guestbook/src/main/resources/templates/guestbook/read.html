@@ -32,12 +32,12 @@
       <div class="form-group"  style="margin-bottom: 13px;">
         <button type="button" class="btn btn-primary"
         th:onclick="'location.href=\''
-          +@{/guestbook/modify(gno=${dto.gno},page=${requestDTO.page})} + '\''"
+        +@{/guestbook/modify(gno=${dto.gno},page=${requestDTO.page})} + '\''"
         >Modify</button>
 
         <button type="button" class="btn btn-info"
         th:onclick="'location.href=\''
-          +@{/guestbook/list(page=${requestDTO.page})} + '\''"
+        +@{/guestbook/list(page=${requestDTO.page})} + '\''"
         >List</button>
       </div>
 
