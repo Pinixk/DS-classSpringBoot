@@ -71,15 +71,19 @@
 
       <script th:inline="javascript">
         window.onload = function(){
-
           var msg = /*[[${msg}]]*/ "msg";
+          
           if (msg) {
+
+            const gno = msg.split(" ")[0];
+            const noti = msg.split(" ")[1];
+            
             console.log(msg);
             var myModal = new bootstrap.Modal(document.getElementById('myModal'),
               { backdrop: true })
-            document.querySelector(".modal-title").textContent='등록 완료'
+            document.querySelector(".modal-title").textContent=noti+' 완료'
             document.querySelector(".modal-body").innerHTML=
-              `<p>${msg}번 글이 등록되었습니다.</p>`
+              `<p>${gno}번 글이 ${noti}되었습니다.</p>`
             myModal.show();
           }
 
