@@ -1,5 +1,6 @@
 package org.zerock.guestbook.service;
 
+import java.util.Optional;
 import java.util.function.Function;
 
 import org.springframework.data.domain.Page;
@@ -26,6 +27,19 @@ public class GuestbookServiceImpl implements GuestbookService {
   // final 필수
 
   @Override
+  public GuestbookDTO read(Long gno) {
+    Optional<Guestbook> result = gbRepositoty.findById(gno);
+
+    // if(result.isPresent()){
+    // GuestbookDTO dto = entityToDto(result.get());
+    // return dto;
+    // }
+    // return null;
+
+    return result.isPresent() ? entityToDto(result.get()) : null;
+  }
+
+  @Override
   public Long register(GuestbookDTO dto) {
     log.info("register dto : " + dto);
     Guestbook entity = dtoToEntity(dto);
@@ -39,13 +53,13 @@ public class GuestbookServiceImpl implements GuestbookService {
     Pageable pageable = requestDTO.getPageable(Sort.by("gno").descending());
     Page<Guestbook> result = gbRepositoty.findAll(pageable);
 
-    Function<Guestbook, GuestbookDTO> fn = new Function<Guestbook,GuestbookDTO>() {
+    Function<Guestbook, GuestbookDTO> fn = new Function<Guestbook, GuestbookDTO>() {
       @Override
       public GuestbookDTO apply(Guestbook entity) {
         return entityToDto(entity);
       }
     };
-    
+
     return new PageResultDTO<>(result, fn);
   }
 }
