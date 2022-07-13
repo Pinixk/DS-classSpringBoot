@@ -38,10 +38,12 @@ public class GuestbookController {
   }
   @PostMapping("/register")
   public String registPost(GuestbookDTO dto, RedirectAttributes ra){ // commend 객체
+    // RedirectAttributes 모델처럼 다음 객체에게 정보를 전달 할 수 있음
+
     log.info("register post.................");
     Long gno = gbService.register(dto);
-    ra.addFlashAttribute("msg", gno);
-    return "redirect:/guestbook/list";
+    ra.addFlashAttribute("msg", gno); // 중복으로 값이 오는 것을 막기 위해
+    return "redirect:/guestbook/list";  // /list에서 받은 값을 간단히 다시 쓰기 위해 resource로 보내지 않고 주소로 보냄
   }
 
 }
