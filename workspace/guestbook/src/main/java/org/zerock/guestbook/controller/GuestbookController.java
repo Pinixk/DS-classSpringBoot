@@ -63,6 +63,8 @@ public class GuestbookController {
     gbService.remove(gno);
     ra.addFlashAttribute("msg", gno+" 삭제");
     ra.addAttribute("page", requestDTO.getPage());
+    ra.addAttribute("type", requestDTO.getType());
+    ra.addAttribute("keyword", requestDTO.getKeyword());
     return "redirect:/guestbook/list";
   }
 
@@ -73,6 +75,8 @@ public class GuestbookController {
     ra.addFlashAttribute("msg", dto.getGno()+" 수정");
     ra.addAttribute("gno", dto.getGno());
     ra.addAttribute("page", requestDTO.getPage());
+    ra.addAttribute("type", requestDTO.getType());
+    ra.addAttribute("keyword", requestDTO.getKeyword());
     return "redirect:/guestbook/read";
   }
   

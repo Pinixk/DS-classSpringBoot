@@ -21,7 +21,7 @@
               <option value="tcw" th:selected="${requestDTO.type == 'tcw'}">제목 + 내용 + 작성자</option>
             </select>
           </div>
-          <input class="form-control" name="keyword" th:value="${requestDTO.keyword}">
+          <input class="form-control" name="keyword" th:value="${requestDTO.keyword}" disabled>
           <div id="button-addon4" class="input-group-append">
             <button class="btn btn-outline-secondary searchBtn" type="button">Search</button>
             <button class="btn btn-outline-secondary clearBtn" type="button">Clear</button>
@@ -125,13 +125,21 @@
           const searchForm = document.querySelector('#searchForm');
           const btnSrch = document.querySelector('.searchBtn');
           const btnClear = document.querySelector('.clearBtn');
+          const selectType = document.querySelector("select[name='type']");
 
           btnSrch.onclick = () => document.querySelector('#searchForm').submit();
           btnClear.onclick = function(){
             document.querySelector("select[name='type']").options[0].selected=true;
             document.querySelector("input[name='keyword']").value="";
           }
-
+          selectType.onchange = function(){
+            if(selectType.options[0].selected!=true){
+              document.querySelector("input[name='keyword']").disabled = false;
+            } else {
+              document.querySelector("input[name='keyword']").value = "";
+              document.querySelector("input[name='keyword']").disabled = true;
+            }
+          }
         }
       </script>
       
