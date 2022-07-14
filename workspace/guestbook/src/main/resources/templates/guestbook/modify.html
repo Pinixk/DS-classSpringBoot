@@ -9,6 +9,8 @@
           <label for="">Gno</label>
           <input type="text" name="gno" class="form-control" th:value="${dto.gno}" readonly>
           <input type="hidden" name="page" th:value="${requestDTO.page}">
+          <input type="hidden" name="type" th:value="${requestDTO.page}">
+          <input type="hidden" name="keyword" th:value="${requestDTO.page}">
         </div>
         <div class="form-group"  style="margin-bottom: 13px;">
           <label for="">Title</label>
@@ -33,7 +35,7 @@
       </form>
 
       <div class="form-group"  style="margin-bottom: 13px;">
-        <button type="button" id="btnModify" class="btn btn-primary">Modify</button>
+        <button type="button" id="btnModify" class="btn btn-primary" >Modify</button>
         <button type="button" id="btnList" class="btn btn-info">List</button>
         <button type="button" id="btnRemove" class="btn btn-danger">Remove</button>
       </div>
@@ -49,7 +51,8 @@
 
         const btnList = document.querySelector("#btnList");
         btnList.onclick= function(){
-          location.href= /*[[@{/guestbook/list(page=${requestDTO.page})}]]*/'url'
+          location.href= /*[[@{/guestbook/list(page=${requestDTO.page},type=${requestDTO.type},
+                                        keyword=${requestDTO.keyword})}]]*/'url'
         }
 
         const btnRemove = document.querySelector("#btnRemove");

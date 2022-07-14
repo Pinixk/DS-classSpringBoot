@@ -29,7 +29,7 @@ public class GuestbookController {
   }
 
   @GetMapping({ "/list" })
-  public void list(PageRequestDTO requestDTO, Model model) {
+  public void list(@ModelAttribute("requestDTO") PageRequestDTO requestDTO, Model model) {
     log.info("list.................");
     model.addAttribute("result", gbService.getList(requestDTO));
   }

@@ -32,6 +32,23 @@ public class GuestbookServiceTests {
         .build();
     PageResultDTO<GuestbookDTO, Guestbook> resultDTO = service.getList(requestDto);
     
+    resultDTOPrint(resultDTO);
+  }
+
+  @Test
+  public void testSearch(){
+    PageRequestDTO requestDTO = PageRequestDTO.builder()
+        .page(1)
+        .size(10)
+        .type("c")
+        .keyword("1")
+        .build();
+    PageResultDTO<GuestbookDTO, Guestbook> resultDTO = service.getList(requestDTO);
+
+    resultDTOPrint(resultDTO);
+  }
+
+  public void resultDTOPrint(PageResultDTO<GuestbookDTO, Guestbook> resultDTO){
     for (GuestbookDTO dto : resultDTO.getDtoList()) {
       System.out.println(dto);
     }

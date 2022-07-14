@@ -31,10 +31,12 @@
 
       <div class="form-group"  style="margin-bottom: 13px;">
         <button type="button" class="btn btn-primary" th:onclick="|location.href=
-          '@{/guestbook/modify(gno=${dto.gno},page=${requestDTO.page})}'|">Modify</button>
+          '@{/guestbook/modify(gno=${dto.gno},page=${requestDTO.page},type=${requestDTO.type},
+          keyword=${requestDTO.keyword})}'|">Modify</button>
 
         <button type="button" class="btn btn-info" th:onclick="|location.href=
-          '@{/guestbook/list(page=${requestDTO.page})}'|">List</button>
+          '@{/guestbook/list(page=${requestDTO.page},type=${requestDTO.type},
+          keyword=${requestDTO.keyword})}'|">List</button>
       </div>
 
       <div id="myModal" class="modal" tabindex="-1" role="dialog">
