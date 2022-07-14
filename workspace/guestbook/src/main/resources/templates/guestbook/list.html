@@ -13,7 +13,7 @@
           <input type="hidden" name="page" value="1">
           <div class="input-group-prepend">
             <select class="form-control custom-select" name="type" style="border-radius: 0;">
-              <option th:selected="${requestDTO.type == null}">-----------------------</option>
+              <option th:selected="${requestDTO.type == null}">---------------</option>
               <option value="t" th:selected="${requestDTO.type == 't'}">제목</option>
               <option value="c" th:selected="${requestDTO.type == 'c'}">내용</option>
               <option value="w" th:selected="${requestDTO.type == 'w'}">작성자</option>
