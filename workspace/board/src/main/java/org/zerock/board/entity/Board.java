@@ -1,6 +1,7 @@
 package org.zerock.board.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,6 +26,8 @@ public class Board extends BaseEntity {
   private String title;
   private String content;
 
-  @ManyToOne
+  // lazy loading
+  // @Transactional 필요
+  @ManyToOne(fetch = FetchType.LAZY)
   private Member writer;
 }

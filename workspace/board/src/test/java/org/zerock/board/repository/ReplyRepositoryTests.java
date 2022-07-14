@@ -1,6 +1,9 @@
 package org.zerock.board.repository;
 
+import java.util.Optional;
 import java.util.stream.IntStream;
+
+import javax.transaction.Transactional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,4 +35,15 @@ public class ReplyRepositoryTests {
 
   }
 
+  // eager loading
+  // 연관관계를 가진 모든 엔티티를 같이 로딩
+  // -> lazy loading
+  @Test
+  @Transactional  // writer에 lazy loading이 걸려 있기 때문
+  public void readReply1(){
+    Optional<Reply> result = repository.findById(1L);
+    Reply reply = result.get();
+    System.out.println(reply);
+    System.out.println(reply.getBoard());
+  }
 }
