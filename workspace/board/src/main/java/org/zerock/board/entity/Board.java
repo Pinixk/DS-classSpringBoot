@@ -30,4 +30,7 @@ public class Board extends BaseEntity {
   // @Transactional 필요
   @ManyToOne(fetch = FetchType.LAZY)
   private Member writer;
+
+  public void changeTitle(String title){this.title = title;}
+  public void changeContent(String content){this.content = content;}
 }
