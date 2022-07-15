@@ -4,8 +4,8 @@
     <th:block th:fragment="content">
       <h1 class="mt-4">Guestbook Read Page</h1>
       <div class="form-group"  style="margin-bottom: 13px;">
-        <label for="">Gno</label>
-        <input type="text" name="gno" class="form-control" th:value="${dto.gno}" readonly>
+        <label for="">Bno</label>
+        <input type="text" name="bno" class="form-control" th:value="${dto.bno}" readonly>
       </div>
       <div class="form-group"  style="margin-bottom: 13px;">
         <label for="">Title</label>
@@ -16,8 +16,8 @@
         <textarea name="content" class="form-control" rows="5" readonly>[[${dto.content}]]</textarea>
       </div>
       <div class="form-group"  style="margin-bottom: 13px;">
-        <label for="">Writer</label>
-        <input type="text" name="writer" class="form-control" th:value="${dto.writer}" readonly>
+        <label for="">Writer Name</label>
+        <input type="text" name="writerName" class="form-control" th:value="${dto.writerName}" readonly>
       </div>
 
       <div class="form-group"  style="margin-bottom: 13px;">
@@ -31,7 +31,7 @@
 
       <div class="form-group"  style="margin-bottom: 13px;">
         <button type="button" class="btn btn-primary" th:onclick="|location.href=
-          '@{/guestbook/modify(gno=${dto.gno},page=${requestDTO.page},type=${requestDTO.type},
+          '@{/guestbook/modify(bno=${dto.bno},page=${requestDTO.page},type=${requestDTO.type},
           keyword=${requestDTO.keyword})}'|">Modify</button>
 
         <button type="button" class="btn btn-info" th:onclick="|location.href=
@@ -64,7 +64,7 @@
           
           if (msg) {
 
-            const gno = msg.split(" ")[0];
+            const bno = msg.split(" ")[0];
             const noti = msg.split(" ")[1];
             
             console.log(msg);
@@ -72,7 +72,7 @@
               { backdrop: true })
             document.querySelector(".modal-title").textContent=noti+' 완료'
             document.querySelector(".modal-body").innerHTML=
-              `<p>${gno}번 글이 ${noti}되었습니다.</p>`
+              `<p>${bno}번 글이 ${noti}되었습니다.</p>`
             myModal.show();
           }
 
