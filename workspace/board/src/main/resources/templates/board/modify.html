@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+  <th:block th:replace="~{/layout/basic::setContent(~{this::content})}">
+    <th:block th:fragment="content">
+      <h1 class="mt-4">Guestbook Read Page</h1>
+      
+      <form th:action="@{/guestbook/modify}" method="post">
+        <div class="form-group"  style="margin-bottom: 13px;">
+          <label for="">Gno</label>
+          <input type="text" name="gno" class="form-control" th:value="${dto.gno}" readonly>
+          <input type="hidden" name="page" th:value="${requestDTO.page}">
+          <input type="hidden" name="type" th:value="${requestDTO.type}">
+          <input type="hidden" name="keyword" th:value="${requestDTO.keyword}">
+        </div>
+        <div class="form-group"  style="margin-bottom: 13px;">
+          <label for="">Title</label>
+          <input type="text" name="title" class="form-control" th:value="${dto.title}">
+        </div>
+        <div class="form-group"  style="margin-bottom: 13px;">
+          <label for="">Content</label>
+          <textarea name="content" class="form-control" rows="5">[[${dto.content}]]</textarea>
+        </div>
+        <div class="form-group"  style="margin-bottom: 13px;">
+          <label for="">Writer</label>
+          <input type="text" name="writer" class="form-control" th:value="${dto.writer}" readonly>
+        </div>
+        <div class="form-group"  style="margin-bottom: 13px;">
+          <label for="">RegDate</label>
+          <input type="text" class="form-control" th:value="${#temporals.format(dto.regDate,'yyyy/MM/dd HH:mm:ss')}" readonly>
+        </div>
+        <div class="form-group"  style="margin-bottom: 13px;">
+          <label for="">ModDate</label>
+          <input type="text" class="form-control" th:value="${#temporals.format(dto.modDate,'yyyy/MM/dd HH:mm:ss')}" readonly>
+        </div>
+      </form>
+
+      <div class="form-group"  style="margin-bottom: 13px;">
+        <button type="button" id="btnModify" class="btn btn-primary" >Modify</button>
+        <button type="button" id="btnList" class="btn btn-info">List</button>
+        <button type="button" id="btnRemove" class="btn btn-danger">Remove</button>
+      </div>
+
+      <script th:inline="javascript">
+        var actionForm = document.querySelector('form');
+        document.querySelector("#btnModify")
+        btnModify.onclick= function(){
+          actionForm.setAttribute("action", /*@{/guestbook/modify}*/'modify');
+          actionForm.setAttribute("method", "post");
+          actionForm.submit();
+        }
+
+        const btnList = document.querySelector("#btnList");
+        btnList.onclick= function(){
+          location.href= /*[[@{/guestbook/list(page=${requestDTO.page},type=${requestDTO.type},
+                                        keyword=${requestDTO.keyword})}]]*/'url'
+        }
+
+        const btnRemove = document.querySelector("#btnRemove");
+        btnRemove.onclick= function(){
+          actionForm.setAttribute("action", /*@{/guestbook/remove}*/'remove');
+          actionForm.setAttribute("method", "post");
+          actionForm.submit();
+        }
+
+      </script>
+
+    </th:block>
+  </th:block>
+</html>
