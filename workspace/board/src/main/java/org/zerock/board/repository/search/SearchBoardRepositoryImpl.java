@@ -29,7 +29,7 @@ public class SearchBoardRepositoryImpl extends QuerydslRepositorySupport impleme
 
     JPQLQuery<Board> jpqlQuery = from(board);
     jpqlQuery.leftJoin(member).on(board.writer.eq(member));
-    jpqlQuery.leftJoin(reply).on(board.eq(board));
+    jpqlQuery.leftJoin(reply).on(reply.board.eq(board));
 
     JPQLQuery<Tuple> tuple = jpqlQuery.select(board, member.email, reply.count());
     tuple.groupBy(board);
