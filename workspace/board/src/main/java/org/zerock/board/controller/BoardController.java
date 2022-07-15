@@ -54,18 +54,7 @@ public class BoardController {
     BoardDTO dto = service.get(bno);
     model.addAttribute("dto", dto);
   }
-
-  // @PostMapping("/remove")
-  // public String remove(Long bno, RedirectAttributes ra, PageRequestDTO requestDTO){
-  //   log.info("remove.............." + bno);
-  //   service.remove(bno);
-  //   ra.addFlashAttribute("msg", bno+" 삭제");
-  //   ra.addAttribute("page", requestDTO.getPage());
-  //   ra.addAttribute("type", requestDTO.getType());
-  //   ra.addAttribute("keyword", requestDTO.getKeyword());
-  //   return "redirect:/guestbook/list";
-  // }
-
+  
   @PostMapping("/modify")
   public String modifyPost(BoardDTO dto, RedirectAttributes ra, PageRequestDTO requestDTO){
     log.info("modify................" + dto);
@@ -75,7 +64,18 @@ public class BoardController {
     ra.addAttribute("page", requestDTO.getPage());
     ra.addAttribute("type", requestDTO.getType());
     ra.addAttribute("keyword", requestDTO.getKeyword());
-    return "redirect:/guestbook/read";
+    return "redirect:/board/read";
+  }
+
+  @PostMapping("/remove")
+  public String remove(Long bno, RedirectAttributes ra, PageRequestDTO requestDTO){
+    log.info("remove.............." + bno);
+    service.remove(bno);
+    ra.addFlashAttribute("msg", bno+" 삭제");
+    ra.addAttribute("page", requestDTO.getPage());
+    ra.addAttribute("type", requestDTO.getType());
+    ra.addAttribute("keyword", requestDTO.getKeyword());
+    return "redirect:/board/list";
   }
 
 }

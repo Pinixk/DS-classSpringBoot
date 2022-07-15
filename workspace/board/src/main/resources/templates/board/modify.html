@@ -4,10 +4,10 @@
     <th:block th:fragment="content">
       <h1 class="mt-4">Guestbook Read Page</h1>
       
-      <form th:action="@{/guestbook/modify}" method="post">
+      <form th:action="@{/board/modify}" method="post">
         <div class="form-group"  style="margin-bottom: 13px;">
           <label for="">Gno</label>
-          <input type="text" name="gno" class="form-control" th:value="${dto.gno}" readonly>
+          <input type="text" name="bno" class="form-control" th:value="${dto.bno}" readonly>
           <input type="hidden" name="page" th:value="${requestDTO.page}">
           <input type="hidden" name="type" th:value="${requestDTO.type}">
           <input type="hidden" name="keyword" th:value="${requestDTO.keyword}">
@@ -21,8 +21,8 @@
           <textarea name="content" class="form-control" rows="5">[[${dto.content}]]</textarea>
         </div>
         <div class="form-group"  style="margin-bottom: 13px;">
-          <label for="">Writer</label>
-          <input type="text" name="writer" class="form-control" th:value="${dto.writer}" readonly>
+          <label for="">Writer Name</label>
+          <input type="text" name="writerName" class="form-control" th:value="${dto.writerName}" readonly>
         </div>
         <div class="form-group"  style="margin-bottom: 13px;">
           <label for="">RegDate</label>
@@ -44,20 +44,20 @@
         var actionForm = document.querySelector('form');
         document.querySelector("#btnModify")
         btnModify.onclick= function(){
-          actionForm.setAttribute("action", /*@{/guestbook/modify}*/'modify');
+          actionForm.setAttribute("action", /*@{/board/modify}*/'modify');
           actionForm.setAttribute("method", "post");
           actionForm.submit();
         }
 
         const btnList = document.querySelector("#btnList");
         btnList.onclick= function(){
-          location.href= /*[[@{/guestbook/list(page=${requestDTO.page},type=${requestDTO.type},
+          location.href= /*[[@{/board/list(page=${requestDTO.page},type=${requestDTO.type},
                                         keyword=${requestDTO.keyword})}]]*/'url'
         }
 
         const btnRemove = document.querySelector("#btnRemove");
         btnRemove.onclick= function(){
-          actionForm.setAttribute("action", /*@{/guestbook/remove}*/'remove');
+          actionForm.setAttribute("action", /*@{/board/remove}*/'remove');
           actionForm.setAttribute("method", "post");
           actionForm.submit();
         }

@@ -13,8 +13,12 @@ import org.zerock.board.dto.PageRequestDTO;
 import org.zerock.board.dto.PageResultDTO;
 import org.zerock.board.entity.Board;
 import org.zerock.board.entity.Member;
+import org.zerock.board.entity.QBoard;
 import org.zerock.board.repository.BoardRepository;
 import org.zerock.board.repository.ReplyRepository;
+
+import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.dsl.BooleanExpression;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -76,5 +80,32 @@ public class BoardServiceImpl implements BoardService{
       repository.save(board);
     }
   }
+
+  @Override
+  public void remove(Long gno) {
+    log.info("remove.................." + gno);    
+    repository.deleteById(gno);
+  }
+
+  // private BooleanBuilder getSearch(PageRequestDTO requestDTO){
+  //   String type = requestDTO.getType();
+  //   String keyword = requestDTO.getKeyword();
+    
+  //   // 기본 쿼리
+  //   BooleanBuilder booleanBuilder = new BooleanBuilder();
+  //   QBoard qBoard = QBoard.board; // 관련된 테이블에 대한 쿼리 객체
+  //   BooleanExpression expression = qBoard.bno.gt(0L);
+  //   booleanBuilder.and(expression);
+  //   if(type == null || type.trim().length() == 0) return booleanBuilder;  // 검색 조건이 없음
+
+  //   // 검색 쿼리
+  //   BooleanBuilder conditionBuilder = new BooleanBuilder();
+  //   if(type.contains("t")){conditionBuilder.or(qBoard.title.contains(keyword));}
+  //   if(type.contains("c")){conditionBuilder.or(qBoard.content.contains(keyword));}
+  //   if(type.contains("w")){conditionBuilder.or(qBoard.writerName.contains(keyword));}
+  //   booleanBuilder.and(conditionBuilder);
+
+  //   return booleanBuilder;
+  // }
 
 }
