@@ -54,6 +54,6 @@ public class BoardServiceImplTests {
                         .content("내용 변경 되었습니다")
                         .build();
     service.modify(dto);
-    
   }
+
 }
