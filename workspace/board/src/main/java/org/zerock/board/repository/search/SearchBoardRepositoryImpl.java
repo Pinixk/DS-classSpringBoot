@@ -70,11 +70,12 @@ public class SearchBoardRepositoryImpl extends QuerydslRepositorySupport impleme
     QReply reply = QReply.reply;
 
     // 2. QDomain으로 join
+    // 검색을 하기 위한 JPQLQuery가 만들어짐
     JPQLQuery<Board> jpqlQuery = from(board); // board를 조건으로 JPQLQuery를 만듬
     jpqlQuery.leftJoin(member).on(board.writer.eq(member)); // board와 member를 join
     jpqlQuery.leftJoin(reply).on(reply.board.eq(board)); // rely를 추가로 join
 
-    // 3. Query 실행
+    // 3. JPQLQuery가 가져오고 싶은 데이터를 선택
     // Tuple : 동적인 query에 대하여 복합데이터를 추출하는 경우에 사용
     JPQLQuery<Tuple> tuple = jpqlQuery.select(board, member, reply.count());
 
@@ -106,7 +107,7 @@ public class SearchBoardRepositoryImpl extends QuerydslRepositorySupport impleme
       booleanBuilder.and(conditionBuilder);
     }
 
-    // tuple에 조건을 붙임
+    // tuple에 조건절을 붙임
     tuple.where(booleanBuilder);
 
     // 정렬
@@ -119,6 +120,7 @@ public class SearchBoardRepositoryImpl extends QuerydslRepositorySupport impleme
         Order direction = order.isAscending() ? Order.ASC : Order.DESC;
         String prop = order.getProperty(); // bno, title
 
+        // 정렬 기준을 가지고 있는 객체
         PathBuilder orderByExpression = new PathBuilder<>(Board.class, "board");
         tuple.orderBy(new OrderSpecifier<>(direction, orderByExpression.get(prop)));
       }
@@ -138,10 +140,10 @@ public class SearchBoardRepositoryImpl extends QuerydslRepositorySupport impleme
     Long count = tuple.fetchCount();
     log.info("Count : " + count);
 
+    // Page 인터페이스를 구현한 PageImpl
     return new PageImpl<Object[]>(
-        result.stream().map(t -> t.toArray()).collect(Collectors.toList()),
-        pageable,
-        count);
-
+        result.stream().map(t -> t.toArray()).collect(Collectors.toList())
+        ,pageable,count
+    );
   }
 }

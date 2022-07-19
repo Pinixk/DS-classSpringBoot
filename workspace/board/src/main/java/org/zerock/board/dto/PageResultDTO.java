@@ -34,8 +34,8 @@ public class PageResultDTO<DTO, EN> {
     size = pageable.getPageSize();                    // 페이지 갯수, 사이즈
     int tempEnd = (int)(Math.ceil(page/10.0))*10;     // 계산 되어 끝나는 페이지
     start = tempEnd -9;                               // 시작 페이지
-    prev = start > 1;                                 // 이전 페이지
     end = totalPage > tempEnd ? tempEnd : totalPage;  // 실제 끝 페이지
+    prev = start > 1;                                 // 이전 페이지
     next = totalPage > tempEnd;                       // 다음 페이지 
     pageList = IntStream.rangeClosed(start,end).boxed().collect(Collectors.toList()); // 페이지네이션
   }

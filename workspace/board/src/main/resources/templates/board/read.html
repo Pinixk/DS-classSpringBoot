@@ -44,9 +44,10 @@
           <h5><span class="btn btn-info badge badge-secondary replyCount">
             Reply Count [[${dto.replyCount}]]</span></h5>
         </div>
-        <div class="list-group replyList"></div>
-      </div>
+        <div class="list-group replyList">
 
+        </div>
+      </div>
 
       <div id="myModal" class="modal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
@@ -86,9 +87,10 @@
             myModal.show();
           }
           
-          const bno = /*[[${dto.bno}]]*/'bno'
+        const bno = /*[[${dto.bno}]]*/'bno'
         const url = /*[[@{/replies/board/}]]*/'url';
         var listGroup = document.querySelector(".replyList");
+
         function formatTime(str){
           var date = new Date(str);
           return date.getFullYear()+'/'+
@@ -97,6 +99,7 @@
                   date.getHours() + ':' +
                   date.getMinutes();
         }
+        
         function loadJSONData(){
           axios({
                 method:"GET",
