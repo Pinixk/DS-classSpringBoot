@@ -86,40 +86,37 @@
             myModal.show();
           }
           
-          const bno = /*[[dto.bno]]*/'bno';
-          const url = /*[[@{/replies/board}]]*/'url';
-          var listGroup = document.querySelector(".replyList");
-
-          function formatTime(str){
-            var date = new Date(str);
-            return date.getFullYear()+"/"+
+          const bno = /*[[${dto.bno}]]*/'bno'
+        const url = /*[[@{/replies/board/}]]*/'url';
+        var listGroup = document.querySelector(".replyList");
+        function formatTime(str){
+          var date = new Date(str);
+          return date.getFullYear()+'/'+
                   (date.getMonth()+1)+'/'+
-                  date.getDate()+' '+
-                  date.getHours()+ ':' +
+                  date.getDate()+ ' ' +
+                  date.getHours() + ':' +
                   date.getMinutes();
-          }
-          
-          function loadJSONData(){
-            axios({
+        }
+        function loadJSONData(){
+          axios({
                 method:"GET",
                 url: 'http://localhost:8080'+url+bno
-            }).then(function(res){
-              console.log(res.data)
-              let str= '';
-              for(const reply of res.data){
-                str = '<div class="card-body form-control" data-rno"'
-                str += reply.rno+'"><b>'+reply.rno+'</b>'
-                str += ' <h5 class="card-title">'+reply.text+'</h5>'
-                str += ' <h6 class="card-subtitle mb-2 text-muted">'
-                str += reply.replier+'</h6>'
-                str += ' <p class="card-text">' + formatTime(reply.regDate) + '</p>'
-                str += ' </div>'
-              }
-              listGroup.innerHTML = str
+          }).then( function(res){
+            let str = '';
+            for (const reply of res.data) {
+              str += 
+              `<div class="card-body form-control" data-rno="${reply.rno}">
+                <b>${reply.rno}</b>
+                <h5 class="card-title">${reply.text}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">${reply.replyer}</h6>
+                <p class="card-text">${formatTime(reply.regDate)}</p>
+              </div>`
+            }
+            listGroup.innerHTML = str
           }).catch(function(err){console.log(err)});
-          }
-          loadJSONData()
         }
+        loadJSONData()
+      }
       </script>
 
     </th:block>
